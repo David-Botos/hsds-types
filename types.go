@@ -1,15 +1,14 @@
 // TODO: Enable ENUM types with GORM
+// TODO: move all GORM keys from varchar to UUID
 
 package hsds_types
 
-import (
-	"time"
-)
+import "time"
 
 // // -- HSDS Definitions -- ////
 type Organization struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationships
 	ParentOrganizationID *string `json:"parent_organization_id,omitempty" gorm:"type:varchar(250);column:parent_organization_id"`
@@ -30,8 +29,8 @@ type Organization struct {
 }
 
 type OrganizationIdentifier struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationships
 	OrganizationID string       `json:"organization_id" gorm:"type:varchar(250);not null;foreignKey:OrganizationID;references:ID" validate:"required"`
@@ -45,8 +44,8 @@ type OrganizationIdentifier struct {
 }
 
 type URL struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationships
 	OrganizationID *string      `json:"organization_id,omitempty" gorm:"type:varchar(250);foreignKey:OrganizationID;references:ID"`
@@ -61,8 +60,8 @@ type URL struct {
 }
 
 type Funding struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationships
 	OrganizationID *string      `json:"organization_id,omitempty" gorm:"type:varchar(250);foreignKey:OrganizationID;references:ID"`
@@ -76,8 +75,8 @@ type Funding struct {
 }
 
 type Unit struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Unit Data
 	ID         string  `json:"id" gorm:"type:varchar(250);primaryKey;not null" validate:"required"`
@@ -88,8 +87,8 @@ type Unit struct {
 }
 
 type Program struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationships
 	OrganizationID string       `json:"organization_id" gorm:"type:varchar(250);not null;uniqueIndex;foreignKey:OrganizationID;references:ID" validate:"required"`
@@ -103,8 +102,8 @@ type Program struct {
 }
 
 type Service struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationships
 	OrganizationID string       `json:"organization_id" gorm:"type:varchar(250);not null;foreignKey:OrganizationID;references:ID" validate:"required"`
@@ -133,12 +132,11 @@ type Service struct {
 	AssurerEmail           *string           `json:"assurer_email,omitempty" gorm:"type:text"`
 	Licenses               *string           `json:"licenses,omitempty" gorm:"type:text"` // Deprecated
 	Alert                  *string           `json:"alert,omitempty" gorm:"type:text"`
-	LastModified           *time.Time        `json:"last_modified,omitempty" gorm:"type:timestamp without time zone"`
 }
 
 type ServiceArea struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationships
 	ServiceID           *string           `json:"service_id,omitempty" gorm:"type:varchar(250);foreignKey:ServiceID;references:ID"`
@@ -156,8 +154,8 @@ type ServiceArea struct {
 }
 
 type ServiceAtLocation struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationships
 	ServiceID  string   `json:"service_id" gorm:"type:varchar(250);not null;foreignKey:ServiceID;references:ID" validate:"required"`
@@ -171,8 +169,8 @@ type ServiceAtLocation struct {
 }
 
 type Location struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 	// Foreign Key Relationships
 	OrganizationID *string       `json:"organization_id,omitempty" gorm:"type:varchar(250);column:organization_id;foreignKey:id"`
 	Organization   *Organization `json:"-" gorm:"foreignKey:OrganizationID;references:ID"`
@@ -191,8 +189,8 @@ type Location struct {
 }
 
 type Address struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationships
 	LocationID *string  `json:"location_id,omitempty" gorm:"type:varchar(250);foreignKey:LocationID;references:ID"`
@@ -245,8 +243,8 @@ type Language struct {
 }
 
 type Accessibility struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationship
 	LocationID *string  `json:"location_id,omitempty" gorm:"type:varchar(250);foreignKey:LocationID;references:ID"`
@@ -277,8 +275,8 @@ type Attribute struct {
 }
 
 type Taxonomy struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Taxonomy Data
 	ID          string  `json:"id" gorm:"type:varchar(250);primaryKey;not null" validate:"required"`
@@ -289,8 +287,8 @@ type Taxonomy struct {
 }
 
 type TaxonomyTerm struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationships
 	TaxonomyID *string        `json:"taxonomy_id,omitempty" gorm:"type:varchar(250);foreignKey:TaxonomyID;references:ID"`
@@ -335,8 +333,8 @@ type Contact struct {
 }
 
 type Phone struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationships
 	LocationID *string  `json:"location_id,omitempty" gorm:"type:varchar(250);foreignKey:LocationID;references:ID"`
@@ -363,8 +361,8 @@ type Phone struct {
 }
 
 type Schedule struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationships
 	ServiceID *string `json:"service_id,omitempty" gorm:"type:varchar(250);foreignKey:ServiceID;references:ID"`
@@ -400,8 +398,8 @@ type Schedule struct {
 }
 
 type ServiceCapacity struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationships
 	ServiceID string  `json:"service_id" gorm:"type:varchar(250);not null;foreignKey:ServiceID;references:ID" validate:"required"`
@@ -419,8 +417,8 @@ type ServiceCapacity struct {
 }
 
 type CostOption struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Foreign Key Relationships
 	ServiceID string  `json:"service_id" gorm:"type:varchar(250);not null;foreignKey:ServiceID;references:ID" validate:"required"`
@@ -437,14 +435,15 @@ type CostOption struct {
 }
 
 type Metadata struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// Resource Reference
 	ResourceID string `json:"resource_id" gorm:"type:text;not null" validate:"required"`
 
 	// Metadata Data
 	ID               string    `json:"id" gorm:"type:varchar(250);primaryKey;not null" validate:"required"`
+	CallID           string    `json:"call_fk" validate:"required"`
 	ResourceType     string    `json:"resource_type" gorm:"type:text;not null" validate:"required"`
 	LastActionDate   time.Time `json:"last_action_date" gorm:"type:date;not null" validate:"required"`
 	LastActionType   string    `json:"last_action_type" gorm:"type:text;not null" validate:"required"`
@@ -455,8 +454,8 @@ type Metadata struct {
 }
 
 type MetaTableDescription struct {
-	CreatedAt time.Time `gorm:"type:timestamp" json:"-"`
-	UpdatedAt time.Time `gorm:"type:timestamp" json:"-"`
+	CreatedAt time.Time `gorm:"type:timestamp" json:"created_at"`
+	UpdatedAt time.Time `gorm:"type:timestamp" json:"updated_at"`
 
 	// MetaTableDescription Data
 	ID           string  `json:"id" gorm:"type:varchar(250);primaryKey;not null" validate:"required"`
